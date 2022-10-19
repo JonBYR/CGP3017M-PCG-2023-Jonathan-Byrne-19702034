@@ -48,29 +48,31 @@ namespace MiniDini.Nodes
                 points.Add(p);
                 if (pos % 4 == 0) points[i].position = editplane.up * width;
                 else if (pos % 4 == 1) points[i].position = editplane.right * width;
-                else if (pos % 4 == 2) points[i].position = editplane.left * width;
-                else if (pos % 4 == 3) points[i].position = editplane.down * width;
+                else if (pos % 4 == 2) points[i].position = editplane.down * width;
+                else if (pos % 4 == 3) points[i].position = editplane.left * width;
                 pos++;
             }
             for (int i = 0; i < 16; i++)
             {
                 indexs[i] = m_geometry.AddPoint(points[i]);
             }
-            Prim gridMatrix[3][3];
+            Prim[,] gridMatrix = new Prim[rows, columns];
+            int numOfPoints = 0;
             for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < columns: j++)
+                for (int j = 0; j < columns; j++)
                 {
-                    gridMatrix[i][j] = new Prim();
-                    for (int k = 0; k < 4; k++)
+                    gridMatrix[i, j] = new Prim();
+                    for (int k = numOfPoints; k < numOfPoints + 4; k++)
                     {
-                        gridMatrix[i][j].points.Add(indexs[k]);
+                        gridMatrix[i, j].points.Add(indexs[k]);
                     }
-                    m_geometry.AddPrim(gridMatrix[i][j]);
+                    m_geometry.AddPrim(gridMatrix[i, j]);
+                    numOfPoints = numOfPoints + 4;
+                    if (numOfPoints == 16) numOfPoints = 0;
                 }
             }
             // here is where we construct the geometry for a grid
-
 
             return m_geometry;
         }
