@@ -46,6 +46,7 @@ namespace MiniDini.Nodes
             {
                 Point p = new();
                 points.Add(p);
+                indexs.Add(0);
                 if (pos % 4 == 0) points[i].position = editplane.up * width;
                 else if (pos % 4 == 1) points[i].position = editplane.right * width;
                 else if (pos % 4 == 2) points[i].position = editplane.down * width;
