@@ -45,7 +45,6 @@ namespace MiniDini.Nodes
             // here is where we construct the geometry for a grid
 
             List<int> indexs = new List<int>();
-            //List<Prim> prims = new List<Prim>();
 
             for (int i = 0; i <= columns; i++)
             {
@@ -74,47 +73,55 @@ namespace MiniDini.Nodes
             }
             gridMatrix[0, 0].points.Add(indexs[0]);
             gridMatrix[0, 0].points.Add(indexs[1]);
-            gridMatrix[0, 0].points.Add(indexs[4]);
-
-            gridMatrix[0, 0].points.Add(indexs[2]);
-            gridMatrix[0, 0].points.Add(indexs[4]);
             gridMatrix[0, 0].points.Add(indexs[5]);
+            gridMatrix[0, 0].points.Add(indexs[4]);
 
-            gridMatrix[0, 0].points.Add(indexs[2]);
-            gridMatrix[0, 0].points.Add(indexs[3]);
-            gridMatrix[0, 0].points.Add(indexs[6]);
-            gridMatrix[0, 0].points.Add(indexs[7]);
+            gridMatrix[0, 1].points.Add(indexs[1]);
+            gridMatrix[0, 1].points.Add(indexs[2]);
+            gridMatrix[0, 1].points.Add(indexs[6]);
+            gridMatrix[0, 1].points.Add(indexs[5]);
 
-            prims[3].points.Add(indexs[4]);
-            prims[3].points.Add(indexs[5]);
-            prims[3].points.Add(indexs[9]);
-            prims[3].points.Add(indexs[8]);
+            gridMatrix[0, 2].points.Add(indexs[2]);
+            gridMatrix[0, 2].points.Add(indexs[3]);
+            gridMatrix[0, 2].points.Add(indexs[7]);
+            gridMatrix[0, 2].points.Add(indexs[6]);
 
-            prims[4].points.Add(indexs[5]);
-            prims[4].points.Add(indexs[6]);
-            prims[4].points.Add(indexs[10]);
-            prims[4].points.Add(indexs[9]);
+            gridMatrix[1, 0].points.Add(indexs[4]);
+            gridMatrix[1, 0].points.Add(indexs[5]);
+            gridMatrix[1, 0].points.Add(indexs[9]);
+            gridMatrix[1, 0].points.Add(indexs[8]);
 
-            prims[5].points.Add(indexs[6]);
-            prims[5].points.Add(indexs[7]);
-            prims[5].points.Add(indexs[11]);
-            prims[5].points.Add(indexs[10]);
+            gridMatrix[1, 1].points.Add(indexs[5]);
+            gridMatrix[1, 1].points.Add(indexs[6]);
+            gridMatrix[1, 1].points.Add(indexs[10]);
+            gridMatrix[1, 1].points.Add(indexs[9]);
 
-            prims[6].points.Add(indexs[8]);
-            prims[6].points.Add(indexs[9]);
-            prims[6].points.Add(indexs[13]);
-            prims[6].points.Add(indexs[12]);
+            gridMatrix[1, 2].points.Add(indexs[6]);
+            gridMatrix[1, 2].points.Add(indexs[7]);
+            gridMatrix[1, 2].points.Add(indexs[11]);
+            gridMatrix[1, 2].points.Add(indexs[10]);
 
-            prims[7].points.Add(indexs[9]);
-            prims[7].points.Add(indexs[10]);
-            prims[7].points.Add(indexs[14]);
-            prims[7].points.Add(indexs[13]);
+            gridMatrix[2, 0].points.Add(indexs[8]);
+            gridMatrix[2, 0].points.Add(indexs[9]);
+            gridMatrix[2, 0].points.Add(indexs[13]);
+            gridMatrix[2, 0].points.Add(indexs[12]);
 
-            prims[8].points.Add(indexs[10]);
-            prims[8].points.Add(indexs[11]);
-            prims[8].points.Add(indexs[15]);
-            prims[8].points.Add(indexs[14]);
+            gridMatrix[2, 1].points.Add(indexs[9]);
+            gridMatrix[2, 1].points.Add(indexs[10]);
+            gridMatrix[2, 1].points.Add(indexs[14]);
+            gridMatrix[2, 1].points.Add(indexs[13]);
 
+            gridMatrix[2, 2].points.Add(indexs[10]);
+            gridMatrix[2, 2].points.Add(indexs[11]);
+            gridMatrix[2, 2].points.Add(indexs[15]);
+            gridMatrix[2, 2].points.Add(indexs[14]);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    m_geometry.AddPrim(gridMatrix[i, j]);
+                }
+            }
             return m_geometry;
         }
 
