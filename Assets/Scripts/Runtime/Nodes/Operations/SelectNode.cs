@@ -70,8 +70,48 @@ namespace MiniDini.Nodes
                 // make a copy of first parents geometry (we should only have one parent!)
                 m_geometry.Clone(parent_geometry);
 				// todo: write the selection code below...
-
-			}
+                if (selmode == SelectionMode.Inside)
+                {
+                    foreach (Point geompoint in m_geometry.points)
+                    {
+                        if ((geompoint.position - point).magnitude <= radius)
+                        {
+                            geompoint.selected = true;
+                        }
+                    }
+                    foreach (Prim geomPrim in m_geometry.prims)
+                    {
+                        foreach (int primPoint in geomPrim.points)
+                        {
+                            if ((m_geometry.points[primPoint].position - point).magnitude <= radius)
+                            {
+                                geomPrim.selected = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Point geompoint in m_geometry.points)
+                    {
+                        if ((geompoint.position - point).magnitude > radius)
+                        {
+                            geompoint.selected = true;
+                        }
+                    }
+                    foreach (Prim geomPrim in m_geometry.prims)
+                    {
+                        geomPrim.selected = true;
+                        foreach (int primPoint in geomPrim.points)
+                        {
+                            if ((m_geometry.points[primPoint].position - point).magnitude <= radius)
+                            {
+                                geomPrim.selected = false;
+                            }
+                        }
+                    }
+                }
+            }
 
 
             return m_geometry;

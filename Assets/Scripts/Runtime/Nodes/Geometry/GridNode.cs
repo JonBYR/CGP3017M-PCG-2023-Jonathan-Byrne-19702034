@@ -47,10 +47,26 @@ namespace MiniDini.Nodes
                 Point p = new();
                 points.Add(p);
                 indexs.Add(0);
-                if (pos % 4 == 0) points[i].position = editplane.up * width;
-                else if (pos % 4 == 1) points[i].position = editplane.right * width;
-                else if (pos % 4 == 2) points[i].position = editplane.down * width;
-                else if (pos % 4 == 3) points[i].position = editplane.left * width;
+                if (pos % 4 == 0)
+                {
+                    points[i].position = editplane.up * width;
+                    editplane.up = editplane.up + new Vector3(0, 1, 0);
+                }
+                else if (pos % 4 == 1)
+                {
+                    points[i].position = editplane.left * width;
+                    editplane.left = editplane.left + new Vector3(-1, 0, 0);
+                }
+                else if (pos % 4 == 2)
+                {
+                    points[i].position = editplane.down * width;
+                    editplane.down = editplane.down + new Vector3(0, -1, 0);
+                }
+                else if (pos % 4 == 3)
+                {
+                    points[i].position = editplane.right * width;
+                    editplane.right = editplane.right + new Vector3(1, 0, 0);
+                }
                 pos++;
             }
             for (int i = 0; i < 16; i++)
