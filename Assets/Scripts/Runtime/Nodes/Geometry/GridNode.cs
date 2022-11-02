@@ -39,40 +39,30 @@ namespace MiniDini.Nodes
             }
 
             m_geometry.Empty();
-            List<Point> points = new List<Point>();
+            Vector3 vec = editplane.point;
+            float length = width / 3;
+            float totalTravelled = 0;
+            // here is where we construct the geometry for a grid
+
             List<int> indexs = new List<int>();
-            int pos = 0;
-            for (int i = 0; i < 16; i++)
+            //List<Prim> prims = new List<Prim>();
+
+            for (int i = 0; i <= columns; i++)
             {
-                Point p = new();
-                points.Add(p);
-                indexs.Add(0);
-                if (pos % 4 == 0)
+                for (int j = 0; j <= rows; j++)
                 {
-                    points[i].position = editplane.up * width;
-                    editplane.up = editplane.up + new Vector3(0, 1, 0);
+                    Point p = new();
+                    p.position = vec;
+                    int index = m_geometry.AddPoint(p);
+                    indexs.Add(index);
+                    vec += new Vector3(length, 0, 0);
+                    totalTravelled += length;
                 }
-                else if (pos % 4 == 1)
-                {
-                    points[i].position = editplane.left * width;
-                    editplane.left = editplane.left + new Vector3(-1, 0, 0);
-                }
-                else if (pos % 4 == 2)
-                {
-                    points[i].position = editplane.down * width;
-                    editplane.down = editplane.down + new Vector3(0, -1, 0);
-                }
-                else if (pos % 4 == 3)
-                {
-                    points[i].position = editplane.right * width;
-                    editplane.right = editplane.right + new Vector3(1, 0, 0);
-                }
-                pos++;
+                vec -= new Vector3(totalTravelled, 0, 0);
+                vec += new Vector3(0, -length, 0);
+                totalTravelled = 0;
             }
-            for (int i = 0; i < 16; i++)
-            {
-                indexs[i] = m_geometry.AddPoint(points[i]);
-            }
+
             Prim[,] gridMatrix = new Prim[rows, columns];
             int numOfPoints = 0;
             for (int i = 0; i < rows; i++)
@@ -80,16 +70,50 @@ namespace MiniDini.Nodes
                 for (int j = 0; j < columns; j++)
                 {
                     gridMatrix[i, j] = new Prim();
-                    for (int k = numOfPoints; k < numOfPoints + 4; k++)
-                    {
-                        gridMatrix[i, j].points.Add(indexs[k]);
-                    }
-                    m_geometry.AddPrim(gridMatrix[i, j]);
-                    numOfPoints = numOfPoints + 4;
-                    if (numOfPoints == 16) numOfPoints = 0;
                 }
             }
-            // here is where we construct the geometry for a grid
+            gridMatrix[0, 0].points.Add(indexs[0]);
+            gridMatrix[0, 0].points.Add(indexs[1]);
+            gridMatrix[0, 0].points.Add(indexs[4]);
+
+            gridMatrix[0, 0].points.Add(indexs[2]);
+            gridMatrix[0, 0].points.Add(indexs[4]);
+            gridMatrix[0, 0].points.Add(indexs[5]);
+
+            gridMatrix[0, 0].points.Add(indexs[2]);
+            gridMatrix[0, 0].points.Add(indexs[3]);
+            gridMatrix[0, 0].points.Add(indexs[6]);
+            gridMatrix[0, 0].points.Add(indexs[7]);
+
+            prims[3].points.Add(indexs[4]);
+            prims[3].points.Add(indexs[5]);
+            prims[3].points.Add(indexs[9]);
+            prims[3].points.Add(indexs[8]);
+
+            prims[4].points.Add(indexs[5]);
+            prims[4].points.Add(indexs[6]);
+            prims[4].points.Add(indexs[10]);
+            prims[4].points.Add(indexs[9]);
+
+            prims[5].points.Add(indexs[6]);
+            prims[5].points.Add(indexs[7]);
+            prims[5].points.Add(indexs[11]);
+            prims[5].points.Add(indexs[10]);
+
+            prims[6].points.Add(indexs[8]);
+            prims[6].points.Add(indexs[9]);
+            prims[6].points.Add(indexs[13]);
+            prims[6].points.Add(indexs[12]);
+
+            prims[7].points.Add(indexs[9]);
+            prims[7].points.Add(indexs[10]);
+            prims[7].points.Add(indexs[14]);
+            prims[7].points.Add(indexs[13]);
+
+            prims[8].points.Add(indexs[10]);
+            prims[8].points.Add(indexs[11]);
+            prims[8].points.Add(indexs[15]);
+            prims[8].points.Add(indexs[14]);
 
             return m_geometry;
         }
