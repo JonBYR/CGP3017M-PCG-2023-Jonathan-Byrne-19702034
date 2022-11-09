@@ -68,7 +68,7 @@ namespace MiniDini.Nodes
             {
                 Geometry parent_geometry = parents[0].GetGeometry();
                 // make a copy of first parents geometry (we should only have one parent!)
-                m_geometry.Clone(parent_geometry);
+                m_geometry.Copy(parent_geometry);
 				// todo: write the selection code below...
                 if (selmode == SelectionMode.Inside)
                 {
