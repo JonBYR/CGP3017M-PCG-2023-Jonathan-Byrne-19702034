@@ -36,6 +36,7 @@ namespace MiniDini.Nodes
 
         [SerializeField]
         public SelectionType seltype = SelectionType.PrimsOnly;
+        
 
 
 
@@ -71,6 +72,26 @@ namespace MiniDini.Nodes
                 m_geometry.Copy(parent_geometry);
 
                 // do some simple maths to select points/prims here!
+                if (seltype == SelectionType.PointsOnly)
+                {
+                    for (int i = range_start; i < range_end; i++)
+                    {
+                        for (int j = 0; j < m_geometry.prims[i].points.Count; j++)
+                        {
+                            m_geometry.points[j].selected = true;
+                            m_geometry.prims[i].selected = true;
+                        }
+                    }
+                }
+                else 
+                {
+                    step = (range_end - range_start) / 3;
+                    for (int i = range_start; i < range_end; i++)
+                    {
+                        m_geometry.prims[i].selected = true;
+                        if (step == 3) i = i + step;
+                    }
+                }
             }
 
             return m_geometry;

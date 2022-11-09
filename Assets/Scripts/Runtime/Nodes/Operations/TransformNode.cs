@@ -45,8 +45,16 @@ namespace MiniDini.Nodes
 
             if (parents.Count > 0)
             {
-               	// simple geometry transformation
-				// look at Matrix4x4 and Quaternion classes!
+                Quaternion rotation = Quaternion.Euler(90, 0, 0);
+                Geometry parent_geometry = parents[0].GetGeometry();
+                m_geometry.Copy(parent_geometry);
+                Prim triangle = m_geometry.prims[0];
+                List<Point> trianglePoints = m_geometry.points;
+                for (int i = 0; i < trianglePoints.Count; i++)
+                {
+                    trianglePoints[i].position = rotation * trianglePoints[i].position;
+                    trianglePoints[i].position = trianglePoints[i].position + new Vector3(100, 0, 0);
+                }
             }
 
             return m_geometry;
