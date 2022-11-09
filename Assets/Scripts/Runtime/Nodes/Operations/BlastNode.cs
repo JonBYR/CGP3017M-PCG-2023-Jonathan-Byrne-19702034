@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,9 +30,9 @@ namespace MiniDini.Nodes
 
         [SerializeField]
         public bool bypass = false;
-
+        [SerializeField]
+        public float radius = 1.0f;
         #region Overrides of Node
-
         public override string GetDescription() { return "Remove selected points and/or prims from geometry"; }
 
         /// <summary>
@@ -42,9 +47,19 @@ namespace MiniDini.Nodes
                 // create new geometry container
                 m_geometry = new Geometry();
             }
-
+            foreach (Point geomPoint in m_geometry.points)
+            {
+                if (geomPoint.selected == true)
+                {
+                    m_geometry.points.Remove(geomPoint);
+                }
+            }
+            foreach (Prim geomPrim in m_geometry.prims)
+            {
+                if (geomPrim.selected == true) m_geometry.prims.Remove(geomPrim);
+            }
             m_geometry.Empty();
-
+            
             // here is where we construct the geometry 
 
 
