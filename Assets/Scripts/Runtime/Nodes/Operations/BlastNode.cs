@@ -42,22 +42,41 @@ namespace MiniDini.Nodes
                 // create new geometry container
                 m_geometry = new Geometry();
             }
-            foreach (Point geomPoint in m_geometry.points)
-            {
-                if (geomPoint.selected == true)
-                {
-                    m_geometry.points.Remove(geomPoint);
-                }
-            }
-            foreach (Prim geomPrim in m_geometry.prims)
-            {
-                if (geomPrim.selected == true) m_geometry.prims.Remove(geomPrim);
-            }
             m_geometry.Empty();
-            
+
             // here is where we construct the geometry 
 
+            List<Node> parents = GetParents();
 
+            if (parents.Count > 0)
+            {
+                Geometry parent_geometry = parents[0].GetGeometry();
+                // make a copy of first parents geometry (we should only have one parent!)
+                m_geometry.Copy(parent_geometry);
+                if (bypass == true) return parent_geometry;
+                else
+                {
+                    foreach (Prim geomPrim in m_geometry.prims)
+                    {
+                        if (geomPrim.selected == true) m_geometry.prims.Remove(geomPrim);
+                    }
+                    foreach (Point geomPoint in m_geometry.points)
+                    {
+                        foreach (Prim gPrim in m_geometry.prims)
+                        {
+                            foreach (int index in gPrim.points)
+                            {
+                                if ((m_geometry.points[index].position - geomPoint.position).magnitude > radius) m_geometry.points.Remove(geomPoint);
+                            }
+                        }
+                        if (geomPoint.selected == true)
+                        {
+                            m_geometry.points.Remove(geomPoint);
+                        }
+                    }
+                    
+                }
+            }
             return m_geometry;
         }
 
