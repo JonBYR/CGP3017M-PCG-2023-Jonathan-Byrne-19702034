@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52386ef29528d974a915b110b5c4a9af, type: 3}
   m_Name: TriangleNode
   m_EditorClassIdentifier: 
-  children: []
+  children:
+  - {fileID: 4915442188883749752}
   parents: []
   guid: fb1e2992d47b0004191f66d3177bc3d9
-  nodeGraphPosition: {x: 0, y: -534.24005}
+  nodeGraphPosition: {x: 385.3201, y: -76.64007}
   hasMultipleParents: 0
   m_geometry:
     points:
@@ -38,7 +39,7 @@ MonoBehaviour:
       col: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       selected: 0
     prims:
-    - points: 000000000200000001000000
+    - points: 000000000100000002000000
       normal: {x: 0, y: 0, z: 0}
       selected: 0
   editplane:
@@ -49,6 +50,7 @@ MonoBehaviour:
     down: {x: 0, y: -1, z: 0}
     left: {x: -1, y: 0, z: 0}
   radius: 2
+  colour: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &-3885306325307881693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24d74edefe7614458b86f86cb9f8268, type: 3}
   m_Name: GridNode
   m_EditorClassIdentifier: 
-  children:
-  - {fileID: 4915442188883749752}
+  children: []
   parents: []
   guid: 8ded18df3433cfa4ca643de5ffb347d7
   nodeGraphPosition: {x: 19, y: -43.119995}
@@ -204,6 +205,7 @@ MonoBehaviour:
   height: 2
   rows: 3
   columns: 3
+  colour: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +253,7 @@ MonoBehaviour:
     down: {x: 0, y: -1, z: 0}
     left: {x: -1, y: 0, z: 0}
   size: 1
+  colour: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4915442188883749752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,13 +268,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   children: []
   parents:
-  - {fileID: -3885306325307881693}
+  - {fileID: -4685044750211282074}
   guid: 461e7de9ef78d9d4aa8cd708e99d6f81
   nodeGraphPosition: {x: 23, y: 123.51993}
   hasMultipleParents: 0
   m_geometry:
-    points: []
-    prims: []
+    points:
+    - position: {x: 0, y: 2, z: 0}
+      normal: {x: 0, y: 1, z: 0}
+      uv1: {x: 0, y: 0}
+      uv2: {x: 0, y: 0}
+      col: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      selected: 0
+    - position: {x: -1.7320508, y: -1.0000002, z: 0}
+      normal: {x: 0, y: 1, z: 0}
+      uv1: {x: 0, y: 0}
+      uv2: {x: 0, y: 0}
+      col: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      selected: 0
+    - position: {x: 1.7320508, y: -1.0000002, z: 0}
+      normal: {x: 0, y: 1, z: 0}
+      uv1: {x: 0, y: 0}
+      uv2: {x: 0, y: 0}
+      col: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      selected: 0
+    prims:
+    - points: 000000000100000002000000
+      normal: {x: 0, y: 0, z: 0}
+      selected: 0
   point: {x: 0, y: 0, z: 0}
   radius: 1
   selmode: 0

@@ -26,6 +26,8 @@ namespace MiniDini.Nodes
         [SerializeField]
         public bool bypass = false;
         [SerializeField]
+        public bool removeAll = false;
+        [SerializeField]
         public float radius = 1.0f;
         #region Overrides of Node
         public override string GetDescription() { return "Remove selected points and/or prims from geometry"; }
@@ -56,19 +58,16 @@ namespace MiniDini.Nodes
                 if (bypass == true) return parent_geometry;
                 else
                 {
+                    if(removeAll == true)
+                    {
+                        m_geometry.Empty();
+                    }
                     foreach (Prim geomPrim in m_geometry.prims)
                     {
                         if (geomPrim.selected == true) m_geometry.prims.Remove(geomPrim);
                     }
                     foreach (Point geomPoint in m_geometry.points)
                     {
-                        foreach (Prim gPrim in m_geometry.prims)
-                        {
-                            foreach (int index in gPrim.points)
-                            {
-                                if ((m_geometry.points[index].position - geomPoint.position).magnitude > radius) m_geometry.points.Remove(geomPoint);
-                            }
-                        }
                         if (geomPoint.selected == true)
                         {
                             m_geometry.points.Remove(geomPoint);

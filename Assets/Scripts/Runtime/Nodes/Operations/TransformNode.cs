@@ -53,8 +53,11 @@ namespace MiniDini.Nodes
                 for (int i = 0; i < trianglePoints.Count; i++)
                 {
                     trianglePoints[i].position = rotation * trianglePoints[i].position;
-                    trianglePoints[i].position = trianglePoints[i].position + new Vector3(100, 0, 0);
+                    //trianglePoints[i].position = trianglePoints[i].position + new Vector3(100, 0, 0);
                 }
+                trianglePoints[0].position = trianglePoints[0].position + new Vector3(100, 0, 0);
+                trianglePoints[1].position = trianglePoints[1].position + new Vector3(100, 0, 0);
+                trianglePoints[2].position = trianglePoints[2].position + new Vector3(100, 0, 0);
             }
 
             return m_geometry;
