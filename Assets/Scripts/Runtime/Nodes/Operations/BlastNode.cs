@@ -64,7 +64,27 @@ namespace MiniDini.Nodes
                     }
                     foreach (Prim geomPrim in m_geometry.prims)
                     {
-                        if (geomPrim.selected == true) m_geometry.prims.Remove(geomPrim);
+                        if (geomPrim.selected == true) 
+                        {
+                            List<Point> tempPoints = new List<Point>();
+                            foreach (int primPoint in geomPrim.points)
+                            {
+                                tempPoints.Add(m_geometry.points[primPoint]);
+                            }
+                            m_geometry.prims.Remove(geomPrim);
+                            for(int i = 0; i < tempPoints.Count; i++)
+                            {
+                                foreach(Prim remainingPrim in m_geometry.prims)
+                                {
+                                    if (remainingPrim.points.Contains(i)) continue;
+                                    else
+                                    {
+                                        m_geometry.points.Remove(tempPoints[i]);
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                     foreach (Point geomPoint in m_geometry.points)
                     {
