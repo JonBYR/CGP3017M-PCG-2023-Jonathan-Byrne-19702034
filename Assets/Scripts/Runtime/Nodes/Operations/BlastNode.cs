@@ -55,6 +55,8 @@ namespace MiniDini.Nodes
                 Geometry parent_geometry = parents[0].GetGeometry();
                 // make a copy of first parents geometry (we should only have one parent!)
                 m_geometry.Copy(parent_geometry);
+                int numOfPoints = m_geometry.points.Count;
+                int numOfPrims = m_geometry.prims.Count;
                 if (bypass == true) return parent_geometry;
                 else
                 {
@@ -62,37 +64,49 @@ namespace MiniDini.Nodes
                     {
                         m_geometry.Empty();
                     }
-                    foreach (Prim geomPrim in m_geometry.prims)
+                    for(int i = 0; i < numOfPrims; i++)
                     {
-                        if (geomPrim.selected == true) 
+                        if (m_geometry.prims[i].selected == true) 
                         {
-                            List<Point> tempPoints = new List<Point>();
-                            foreach (int primPoint in geomPrim.points)
+                            m_geometry.prims.Remove(m_geometry.prims[i]);
+                            numOfPrims--;
+                        }
+                    }
+                    
+                    for (int i = 0; i < numOfPoints; i++)
+                    {
+                        if (m_geometry.points[i].selected == true)
+                        {
+                            int index = i;
+                            
+                            for(int j = 0; j < numOfPrims; j++)
                             {
-                                tempPoints.Add(m_geometry.points[primPoint]);
-                            }
-                            m_geometry.prims.Remove(geomPrim);
-                            for(int i = 0; i < tempPoints.Count; i++)
-                            {
-                                foreach(Prim remainingPrim in m_geometry.prims)
+                                Prim currentPrim = m_geometry.prims[j];
+                                if (currentPrim.points.Contains(index) == true) continue;
+                                else
                                 {
-                                    if (remainingPrim.points.Contains(i)) continue;
-                                    else
+                                    m_geometry.points.Remove(m_geometry.points[index]);
+                                    numOfPoints--;
+                                    for (int l = 0; l < currentPrim.points.Count; l++)
                                     {
-                                        m_geometry.points.Remove(tempPoints[i]);
+                                        if (currentPrim.points[l] > index) currentPrim.points[l] = currentPrim.points[l] - 1;
                                     }
                                 }
                             }
+                            m_geometry.points.Remove(m_geometry.points[i]);
+                            numOfPoints--;
+                            for (int k = 0; k < numOfPrims; k++)
+                            {
+                                for(int l = 0; l < m_geometry.prims[k].points.Count; l++)
+                                {
+                                    if (m_geometry.prims[k].points[l] > index) m_geometry.prims[k].points[l] = m_geometry.prims[k].points[l] - 1;
+                                }
+                                
+                            }
+                            
                         }
-                        
                     }
-                    foreach (Point geomPoint in m_geometry.points)
-                    {
-                        if (geomPoint.selected == true)
-                        {
-                            m_geometry.points.Remove(geomPoint);
-                        }
-                    }
+                    
                     
                 }
             }

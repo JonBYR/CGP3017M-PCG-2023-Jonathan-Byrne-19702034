@@ -225,6 +225,7 @@ MonoBehaviour:
   - {fileID: -3885306325307881693}
   - {fileID: 4915442188883749752}
   - {fileID: 6439014751423700664}
+  - {fileID: 8196940506201626424}
 --- !u!114 &3421966995057729839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,3 +330,26 @@ MonoBehaviour:
     left: {x: -1, y: 0, z: 0}
   width: 2
   height: 2
+--- !u!114 &8196940506201626424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c00c4435b63a54f8c6d2e7a1ac3bfb, type: 3}
+  m_Name: BlastNode
+  m_EditorClassIdentifier: 
+  children: []
+  parents: []
+  guid: 97852bfb24e5726499f41bbafff261eb
+  nodeGraphPosition: {x: 0, y: 0}
+  hasMultipleParents: 0
+  m_geometry:
+    points: []
+    prims: []
+  bypass: 0
+  removeAll: 0
+  radius: 1
