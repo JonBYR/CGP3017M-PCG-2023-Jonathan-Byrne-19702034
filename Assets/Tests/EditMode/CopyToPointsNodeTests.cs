@@ -61,7 +61,7 @@ public class CopyToPointsNodeTests
     /// <summary>
     /// This test uses the triangle as input node and copies its contents to the points of a grid, so we should end up with
     /// (grid points * 3) points and (grid points * 1) prims
-    /// using the defualt grid, we have a 3x3 grid with 16 points 
+    /// using the default grid, we have a 3x3 grid with 16 points 
     /// </summary>
 
     [Test]
