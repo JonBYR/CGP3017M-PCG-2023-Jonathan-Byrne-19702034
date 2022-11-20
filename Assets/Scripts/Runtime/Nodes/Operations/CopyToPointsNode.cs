@@ -35,21 +35,30 @@ namespace MiniDini.Nodes
             List<Node> parents = GetParents();
             if(parents.Count > 0) 
             { 
-                Geometry parent_geometry = parents[0].GetGeometry();
-                Debug.Log(parent_geometry.prims.Count);
-                for(int i = 0; i < parent_geometry.points.Count; i++)
+                Geometry parent_geometry = parents[1].GetGeometry();
+                Geometry toCopy = parents[0].GetGeometry();
+                m_geometry.Copy(parent_geometry);
+                Debug.Log(m_geometry.prims.Count);
+                List<Vector3> copiedPoints = m_geometry.getPointList();
+                int numOfPoints = copiedPoints.Count;
+
+                m_geometry.Empty();
+
+                for (int i = 0; i < numOfPoints; i++)
                 {
-                    m_geometry.points.Add(parent_geometry.points[i]);
-                }
-                for(int i = 0; i < parent_geometry.prims.Count; i++)
-                {
-                    m_geometry.prims.Add(parent_geometry.prims[i]);
-                    for(int j = 0; j < m_geometry.prims[i].points.Count; j++)
+                    for (int j = 0; j < toCopy.points.Count; j++)
                     {
-                        m_geometry.points.Add(m_geometry.points[i]);
+                        m_geometry.points.Add(toCopy.points[j]);
+                        //TODO:: Change position to point we add using copiedPoints
+                    }
+
+                    for (int j = 0; j < toCopy.prims.Count; j++)
+                    {
+                        m_geometry.prims.Add(toCopy.prims[j]);
                     }
                 }
-                Debug.Log(m_geometry.points.Count);
+                //m_geometry.points = m_geometry.points.GetRange(0, 128);
+                Debug.Log(m_geometry.prims.Count);
             }
             return m_geometry;
         }
