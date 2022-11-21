@@ -38,7 +38,6 @@ namespace MiniDini.Nodes
                 Geometry parent_geometry = parents[1].GetGeometry();
                 Geometry toCopy = parents[0].GetGeometry();
                 m_geometry.Copy(parent_geometry);
-                Debug.Log(m_geometry.prims.Count);
                 List<Vector3> copiedPoints = m_geometry.getPointList();
                 int numOfPoints = copiedPoints.Count;
 
@@ -57,8 +56,6 @@ namespace MiniDini.Nodes
                         m_geometry.prims.Add(toCopy.prims[j]);
                     }
                 }
-                //m_geometry.points = m_geometry.points.GetRange(0, 128);
-                Debug.Log(m_geometry.prims.Count);
             }
             return m_geometry;
         }

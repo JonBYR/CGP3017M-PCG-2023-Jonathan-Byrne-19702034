@@ -32,7 +32,48 @@ namespace MiniDini.Nodes
             m_geometry.Empty();
 
             // here is where we construct the geometry 
-
+            List<Node> parents = GetParents();
+            if (parents.Count > 0)
+            {
+                List<Geometry> parent_geometries = new List<Geometry>();
+                for(int i = 0; i < parents.Count; i++)
+                {
+                    parent_geometries.Add(parents[i].GetGeometry());
+                }
+                for(int i = 0; i < parent_geometries.Count; i++)
+                {
+                    for (int j = 0; j < parent_geometries[i].points.Count; j++)
+                    {
+                        m_geometry.points.Add(parent_geometries[i].points[j]);
+                    }
+                    for (int j = 0; i < parent_geometries[i].prims.Count; j++)
+                    {
+                        m_geometry.prims.Add(parent_geometries[i].prims[j]);
+                    }
+                }
+                Debug.Log(m_geometry.points);
+                Debug.Log(m_geometry.prims);
+                //Geometry parent_geometry_1 = parents[0].GetGeometry();
+                //Geometry parent_geometry_2 = parents[1].GetGeometry();
+                /*
+                for(int i = 0; i < parent_geometry_1.points.Count; i++)
+                {
+                    m_geometry.points.Add(parent_geometry_1.points[i]);
+                }
+                for (int i = 0; i < parent_geometry_2.points.Count; i++)
+                {
+                    m_geometry.points.Add(parent_geometry_2.points[i]);
+                }
+                for(int i = 0; i < parent_geometry_1.prims.Count; i++)
+                {
+                    m_geometry.prims.Add(parent_geometry_1.prims[i]);
+                }
+                for (int i = 0; i < parent_geometry_2.prims.Count; i++)
+                {
+                    m_geometry.prims.Add(parent_geometry_2.prims[i]);
+                }
+                */
+            }
 
             return m_geometry;
         }
