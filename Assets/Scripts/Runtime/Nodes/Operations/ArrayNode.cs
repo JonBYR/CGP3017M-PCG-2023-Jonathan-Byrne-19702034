@@ -57,8 +57,39 @@ namespace MiniDini.Nodes
                 Geometry parent_geometry = parents[0].GetGeometry();
 				// here we have the parent geometry, so we need to create copies of it
 				// (numcopies) times, either translating or rotating as we go...
-                
-                
+                for(int i = 0; i < numcopies; i++)
+                {
+                    for(int j = 0; j < parent_geometry.prims.Count; j++)
+                    {
+                        m_geometry.prims.Add(parent_geometry.prims[j]);
+                    }
+                    
+                    for(int k = 0; k < parent_geometry.points.Count; k++)
+                    {
+                        m_geometry.points.Add(parent_geometry.points[k]);
+                    }
+                    
+                }
+                float xMax = 0.0f;
+                for(int i = 0; i < m_geometry.points.Count; i++)
+                {
+                    if (m_geometry.points[i].position.x <= xMax)
+                    {
+                        m_geometry.points[i].position += new Vector3(20f, 0, 0);
+                        xMax = m_geometry.points[i].position.x;
+                    }
+                }
+                for(int i = 0; i < m_geometry.points.Count; i++)
+                {
+                    Quaternion rotation = Quaternion.Euler(90, 0, 0);
+                    m_geometry.points[i].position = rotation * m_geometry.points[i].position;
+                    float y = m_geometry.points[i].position.y;
+                    float x = m_geometry.points[i].position.x;
+                    if(y != 0.0f)
+                    {
+                        m_geometry.points[i].position = new Vector3(x, 0, 0);
+                    }
+                }
             }
 
             return m_geometry;
