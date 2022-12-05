@@ -50,14 +50,18 @@ namespace MiniDini.Nodes
                 m_geometry.Copy(parent_geometry);
                 Prim triangle = m_geometry.prims[0];
                 List<Point> trianglePoints = m_geometry.points;
+                /*
+                trianglePoints[0].position = (trianglePoints[0].position + new Vector3(100, 0, 0));
+                trianglePoints[1].position = (trianglePoints[1].position + new Vector3(100, 0, 0));
+                trianglePoints[2].position = (trianglePoints[2].position + new Vector3(100, 0, 0));
+                */
                 for (int i = 0; i < trianglePoints.Count; i++)
                 {
-                    trianglePoints[i].position = rotation * trianglePoints[i].position;
+                    trianglePoints[i].position = (rotation * trianglePoints[i].position) + new Vector3(100, 0, 0);
+                    Debug.Log(trianglePoints[i].position);
                     //trianglePoints[i].position = trianglePoints[i].position + new Vector3(100, 0, 0);
                 }
-                trianglePoints[0].position = trianglePoints[0].position + new Vector3(100, 0, 0);
-                trianglePoints[1].position = trianglePoints[1].position + new Vector3(100, 0, 0);
-                trianglePoints[2].position = trianglePoints[2].position + new Vector3(100, 0, 0);
+                
             }
 
             return m_geometry;

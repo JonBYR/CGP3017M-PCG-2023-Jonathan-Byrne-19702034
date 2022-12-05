@@ -53,8 +53,6 @@ namespace MiniDini.Nodes
                     }
                 }
                 */ //not sure why this doesn't work
-                Debug.Log(m_geometry.points);
-                Debug.Log(m_geometry.prims);
                 Geometry parent_geometry_1 = parents[0].GetGeometry();
                 Geometry parent_geometry_2 = parents[1].GetGeometry();
                 if(parents.Count == 4)
