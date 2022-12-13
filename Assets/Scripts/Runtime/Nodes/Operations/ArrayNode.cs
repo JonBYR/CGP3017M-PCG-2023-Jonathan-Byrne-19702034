@@ -82,13 +82,16 @@ namespace MiniDini.Nodes
                 for(int i = 0; i < m_geometry.points.Count; i++)
                 {
                     Quaternion rotation = Quaternion.Euler(90, 0, 0);
+                    Debug.Log("Before");
+                    Debug.Log(m_geometry.points[i].position);
                     m_geometry.points[i].position = rotation * m_geometry.points[i].position;
+                    Debug.Log("After");
+                    Debug.Log(m_geometry.points[i].position);
                     float y = m_geometry.points[i].position.y;
                     float x = m_geometry.points[i].position.x;
-                    if(y != 0.0f)
-                    {
-                        m_geometry.points[i].position = new Vector3(x, 0, 0);
-                    }
+                    Point temp = new Point(m_geometry.points[i]);
+                    m_geometry.points[i] = temp;
+
                 }
             }
 

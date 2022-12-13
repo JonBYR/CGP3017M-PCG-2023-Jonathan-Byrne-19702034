@@ -148,6 +148,8 @@ public class ArrayNodeTests
         int num_almost_zero = 0;
         foreach (Point p in geom.points)
         {
+            Debug.Log("Test");
+            Debug.Log(p.position);
             float y = p.position.y;
             if ((y >= -0.01f) && (y <= 0.01f)) num_almost_zero++;
         }
