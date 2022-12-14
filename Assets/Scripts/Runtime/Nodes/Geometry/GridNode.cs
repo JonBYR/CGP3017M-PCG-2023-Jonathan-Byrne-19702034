@@ -47,8 +47,8 @@ namespace MiniDini.Nodes
             }
 
             m_geometry.Empty();
-            Vector3 vec = editplane.point;
             float length = width / 3;
+            Vector3 vec = editplane.point - new Vector3(1, -1, 0);
             float totalTravelled = 0;
             // here is where we construct the geometry for a grid
 

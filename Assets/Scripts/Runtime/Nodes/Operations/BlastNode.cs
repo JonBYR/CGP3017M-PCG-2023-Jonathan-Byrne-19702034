@@ -27,8 +27,6 @@ namespace MiniDini.Nodes
         public bool bypass = false;
         [SerializeField]
         public bool removeAll = false;
-        [SerializeField]
-        public float radius = 1.0f;
         #region Overrides of Node
         public override string GetDescription() { return "Remove selected points and/or prims from geometry"; }
 
@@ -60,54 +58,61 @@ namespace MiniDini.Nodes
                 if (bypass == true) return parent_geometry;
                 else
                 {
-                    if(removeAll == true)
+                    if (removeAll == true)
                     {
                         m_geometry.Empty();
                     }
-                    for(int i = 0; i < numOfPrims; i++)
+                    else
                     {
-                        if (m_geometry.prims[i].selected == true) 
+                        for (int i = 0; i < m_geometry.prims.Count; i++)
                         {
-                            m_geometry.prims.Remove(m_geometry.prims[i]);
-                            numOfPrims--;
-                        }
-                    }
-                    
-                    for (int i = 0; i < numOfPoints; i++)
-                    {
-                        if (m_geometry.points[i].selected == true)
-                        {
-                            int index = i;
-                            
-                            for(int j = 0; j < numOfPrims; j++)
+                            for (int j = 0; j < m_geometry.prims[i].points.Count; j++)
                             {
-                                Prim currentPrim = m_geometry.prims[j];
-                                if (currentPrim.points.Contains(index) == true) continue;
-                                else
+                                if (m_geometry.prims[i].selected == true || m_geometry.points[m_geometry.prims[i].points[j]].selected == true)
                                 {
-                                    m_geometry.points.Remove(m_geometry.points[index]);
-                                    numOfPoints--;
-                                    for (int l = 0; l < currentPrim.points.Count; l++)
+                                    m_geometry.prims.RemoveAt(i);
+                                    i--;
+                                    break;
+                                }
+                            }
+                            
+                        }
+
+                        for (int i = 0; i < m_geometry.points.Count; i++)
+                        {
+                            if (m_geometry.points[i].selected == true)
+                            {
+                                m_geometry.points.RemoveAt(i);
+                                for (int j = 0; j < m_geometry.prims.Count; j++)
+                                {
+                                    for(int k = 0; k < m_geometry.prims[j].points.Count; k++)
                                     {
-                                        if (currentPrim.points[l] > index) currentPrim.points[l] = currentPrim.points[l] - 1;
+                                        if (m_geometry.prims[j].points[k] > i)
+                                        {
+                                            m_geometry.prims[j].points[k]--;
+                                        }
+                                    }
+                                } 
+                                i--;
+
+                                /*int index = i;
+                                for (int j = 0; j < numOfPrims; j++)
+                                {
+                                    Prim currentPrim = m_geometry.prims[j];
+                                    if (currentPrim.points.Contains(index) == false)
+                                    {
+                                        for (int l = 0; l < currentPrim.points.Count; l++)
+                                        {
+                                            if (currentPrim.points[l] > index) currentPrim.points[l] = currentPrim.points[l] - 1;
+                                        }
                                     }
                                 }
+                                m_geometry.points.Remove(m_geometry.points[i]);
+                                numOfPoints--;*/
                             }
-                            m_geometry.points.Remove(m_geometry.points[i]);
-                            numOfPoints--;
-                            for (int k = 0; k < numOfPrims; k++)
-                            {
-                                for(int l = 0; l < m_geometry.prims[k].points.Count; l++)
-                                {
-                                    if (m_geometry.prims[k].points[l] > index) m_geometry.prims[k].points[l] = m_geometry.prims[k].points[l] - 1;
-                                }
-                                
-                            }
-                            
                         }
                     }
-                    
-                    
+                    return m_geometry;
                 }
             }
             return m_geometry;
