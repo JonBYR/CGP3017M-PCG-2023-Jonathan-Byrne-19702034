@@ -91,7 +91,7 @@ public class SelectNodeTests
         selnode.radius = 0.1f;
 		{
             // move the selection to the top left
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, 1, 0);
             selnode.seltype = SelectNode.SelectionType.PointsOnly;
             selnode.selmode = SelectNode.SelectionMode.Inside;
             Geometry geom = selnode.GetGeometry();
@@ -111,7 +111,7 @@ public class SelectNodeTests
         }
         {
             // move the selection to the bottom right
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, 1, 0);
             selnode.seltype = SelectNode.SelectionType.PointsOnly;
             selnode.selmode = SelectNode.SelectionMode.Inside;
             Geometry geom = selnode.GetGeometry();
@@ -121,7 +121,7 @@ public class SelectNodeTests
         }
         {
             // move the selection to the bottom left
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, -1, 0);
             selnode.seltype = SelectNode.SelectionType.PointsOnly;
             selnode.selmode = SelectNode.SelectionMode.Inside;
             Geometry geom = selnode.GetGeometry();
@@ -146,7 +146,7 @@ public class SelectNodeTests
         selnode.radius = 0.1f;
         {
             // move the selection to the top left
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, 1, 0);
             selnode.seltype = SelectNode.SelectionType.PointsOnly;
             selnode.selmode = SelectNode.SelectionMode.Outside;
             Geometry geom = selnode.GetGeometry();
@@ -168,7 +168,7 @@ public class SelectNodeTests
         selnode.radius = 0.1f;
         {
             // move the selection to the top left
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, 1, 0);
             selnode.seltype = SelectNode.SelectionType.PointsAndPrims;
             selnode.selmode = SelectNode.SelectionMode.Inside;
             Geometry geom = selnode.GetGeometry();
@@ -192,7 +192,7 @@ public class SelectNodeTests
         selnode.radius = 0.1f;
         {
             // move the selection to the top left
-            selnode.point = new Vector3(1, 1, 0);
+            selnode.point = new Vector3(-1, 1, 0);
             selnode.seltype = SelectNode.SelectionType.PrimsOnly;
             selnode.selmode = SelectNode.SelectionMode.Outside;
             Geometry geom = selnode.GetGeometry();
